@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Menu1</string>
+    <string name="OrderedStuff1">Stuff Ordered</string>
+    <string name="orderedStuff1">ordered Stuff</string>
+    <string name="orderTotal1">orderTotal</string>
+    <string name="tax1">tax</string>
+    <string name="Total1">Total</string>
+    <string name="dineIn1">Dine In</string>
+    <string name="carryout1">Carryout</string>
+    <string name="delivery1">Delivery</string>
+    <string name="deliveryMethod1">Delivery Method</string>
+    <string name="carddata1">Enter Credit Card Number</string>
+    <string name="carddate1">Enter Date on Card</string>
+    <string name="cardcode1">Enter Security Digits</string>
+    <string name="submitOrder1">Submit Order</string>
+    <string name="cnfrmMsg1">Data Pass Confirmation Message</string>
+</resources>
