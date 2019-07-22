@@ -214,7 +214,7 @@ public class MainActivity extends Activity {
 
  //           qty.setX(x1);
  //           qty.setY(y1-20);
-//            qty.setLayoutParams(lp);
+            qty.setLayoutParams(lp);
             ll.addView(qty);
             //rl.addView(qty);
 
