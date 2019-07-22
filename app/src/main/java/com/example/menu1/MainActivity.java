@@ -40,21 +40,22 @@ public class MainActivity extends Activity {
         item[5][0] = "Item 6";
         item[6][0] = "Item 7";
 
-        item[0][1] = "Description 1";
-        item[1][1] = "Description 2";
-        item[2][1] = "Description 3";
-        item[3][1] = "Description 4";
-        item[4][1] = "Description 5";
-        item[5][1] = "Description 6";
-        item[6][1] = "Description 7";
+        item[0][1] = "01.00";
+        item[1][1] = "10.00";
+        item[2][1] = "20.00";
+        item[3][1] = "05.00";
+        item[4][1] = "10.00";
+        item[5][1] = "20.00";
+        item[6][1] = "05.00";
 
-        item[0][2] = "01.00";
-        item[1][2] = "10.00";
-        item[2][2] = "20.00";
-        item[3][2] = "05.00";
-        item[4][2] = "10.00";
-        item[5][2] = "20.00";
-        item[6][2] = "05.00";
+
+        item[0][2] = "Description 1";
+        item[1][2] = "Description 2";
+        item[2][2] = "Description 3";
+        item[3][2] = "Description 4";
+        item[4][2] = "Description 5";
+        item[5][2] = "Description 6";
+        item[6][2] = "Description 7";
 
         final int[][] orderList = createMenuList(item);
 
@@ -62,7 +63,6 @@ public class MainActivity extends Activity {
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
 /*              // check that button press is working- it is
                 SystemClock.sleep(3000);
                 android.os.Process.killProcess(android.os.Process.myPid());
@@ -127,8 +127,8 @@ public class MainActivity extends Activity {
 
     public int[][] createMenuList(String[][] item) {
 
-        int x = 100, y = 200;
         int[][] intArray = new int[item.length+1][2];
+
 
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.rl);
 
@@ -137,6 +137,7 @@ public class MainActivity extends Activity {
                 LayoutParams.WRAP_CONTENT, // Width of TextView
                 LayoutParams.WRAP_CONTENT); // Height of TextView
         lp.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+        lp.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
 
         LayoutParams lp2 = new LayoutParams(
                 LayoutParams.MATCH_PARENT, // Width of TextView
@@ -145,51 +146,37 @@ public class MainActivity extends Activity {
 
         LayoutParams lp3 = new LayoutParams(
                 LayoutParams.WRAP_CONTENT, // Width of TextView
-                LayoutParams.WRAP_CONTENT); // Height of TextView
+                LayoutParams.MATCH_PARENT); // Height of TextView
         lp3.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
 
+        LayoutParams lp4 = new LayoutParams(
+                LayoutParams.MATCH_PARENT, // Width of TextView
+                LayoutParams.MATCH_PARENT); // Height of TextView
+        lp4.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
 
-        /*ScrollView sv = new ScrollView(this);
-        sv.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
+        RelativeLayout.LayoutParams rLParams =
+                new RelativeLayout.LayoutParams(
+                        LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+        rLParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 1);
+/////////////////////// Scroll view setup:
+        ScrollView sv = new ScrollView(this);
+        sv.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
         LinearLayout ll = new LinearLayout(this);
-        ll.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-
-        ll.setOrientation(1);
+        ll.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
+        ll.setOrientation(LinearLayout.VERTICAL);
+//        lp.LayoutParams(l1);
         sv.addView(ll);
-*/
-        /*for(int i = 0; i < 20; i++)
-        {
-            Button b = new Button(this);
-            b.setText("Button "+i);
-            ll.addView(b);
-        }*/
 
-//        rl.addView(sv);
 
+//        float x1 = 100, y1 = 200;
         for (int row = 0; row < item.length; row++) {
-
             for (int col = 0; col < item[row].length; col++) {
                 // Get the widgets reference from XML layout
-
 
                 // Create a TextView programmatically.
                 TextView tv = new TextView(getApplicationContext());
 
-
-  // set description a little bit lower
-                if (col != 1)
-                {
-                    tv.setX(x);
-                    tv.setY(y);
-                    x += 250;
-                    tv.setLayoutParams(lp);
-                }
-                else
-                {
-                      tv.setX(100);
-                      tv.setY(y+50);
-                      tv.setLayoutParams(lp2);
-                }
 
 /*
     // set description to same row as others
@@ -197,30 +184,26 @@ public class MainActivity extends Activity {
                 if (col != 1) x += 150;
                 else    x += 400;
 */
-
-                // Apply the layout parameters to TextView widget
-//                tv.setLayoutParams(lp);
                 // Set text to display in TextView
                 tv.setText(item[row][col]);
                 // Set a text color for TextView text
                 tv.setTextColor(Color.parseColor("#ff0000"));
-                // Add newly created TextView to parent view group (RelativeLayout)
-                rl.addView(tv);
-  //              ll.addView(tv);
-            }
+                ll.addView(tv);
+//                rl.addView(tv);
+              }
+
 
             CheckBox cb = new CheckBox(getApplicationContext());
             cb.setText("Quantity: ");
-            //
             cb.setId(cb.generateViewId());
             Integer id = (cb.getId());
             intArray[row][0] = id;
- //           cb.setText(intArray.toString());
-            cb.setX(x);
-            cb.setY(y);
-            //ll.addView(cb);
-            rl.addView(cb);
-            x += 250;
+
+//            cb.setX(x1);
+//            cb.setY(y1);
+  //          cb.setLayoutParams(lp);
+            ll.addView(cb);
+//            x += 250;
 
             EditText qty = new EditText(getApplicationContext());
             qty.setText("1");
@@ -228,17 +211,21 @@ public class MainActivity extends Activity {
             Integer id2 = (qty.getId());
             intArray[row][1] = id2;
   //          qty.setText(intArray.toString());
-            qty.setX(x);
-            qty.setY(y-20);
-            //ll.addView(qty);
-            rl.addView(qty);
 
-            x = 100;
-            y += 200;
+ //           qty.setX(x1);
+ //           qty.setY(y1-20);
+//            qty.setLayoutParams(lp);
+            ll.addView(qty);
+            //rl.addView(qty);
 
+   //         x1 = 100;
+     //       y1 += 200;
             // add a check box
         }
-  //      rl.addView(sv);
+//        rl.removeView(sv);
+
+        rl.addView(sv);
+
 
 
         Button slct = new Button(getApplicationContext());
@@ -248,16 +235,11 @@ public class MainActivity extends Activity {
         slct.setId(slct.generateViewId());
         Integer id3 = slct.getId();
         intArray[item.length][0] = id3;
-//        slct.setText(id3.toString());
-//        slct.setX(x);
-        slct.setY(y);
 
-        slct.setLayoutParams(lp3);
+        rl.addView(slct, rLParams);
 
-        rl.addView(slct);
 
         return intArray;
-
 
     }
 
