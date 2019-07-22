@@ -7,12 +7,16 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,22 +31,30 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final String[][] item = new String[4][3];
+        final String[][] item = new String[7][3];
         item[0][0] = "Item 1";
         item[1][0] = "Item 2";
         item[2][0] = "Item 3";
         item[3][0] = "Item 4";
+        item[4][0] = "Item 5";
+        item[5][0] = "Item 6";
+        item[6][0] = "Item 7";
 
         item[0][1] = "Description 1";
         item[1][1] = "Description 2";
         item[2][1] = "Description 3";
         item[3][1] = "Description 4";
+        item[4][1] = "Description 5";
+        item[5][1] = "Description 6";
+        item[6][1] = "Description 7";
 
         item[0][2] = "01.00";
         item[1][2] = "10.00";
         item[2][2] = "20.00";
         item[3][2] = "05.00";
-
+        item[4][2] = "10.00";
+        item[5][2] = "20.00";
+        item[6][2] = "05.00";
 
         final int[][] orderList = createMenuList(item);
 
@@ -121,16 +133,39 @@ public class MainActivity extends Activity {
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.rl);
 
         // Create a LayoutParams for TextView
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT, // Width of TextView
-                RelativeLayout.LayoutParams.WRAP_CONTENT); // Height of TextView
+        LayoutParams lp = new LayoutParams(
+                LayoutParams.WRAP_CONTENT, // Width of TextView
+                LayoutParams.WRAP_CONTENT); // Height of TextView
         lp.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
 
-        RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT, // Width of TextView
-                RelativeLayout.LayoutParams.WRAP_CONTENT); // Height of TextView
+        LayoutParams lp2 = new LayoutParams(
+                LayoutParams.MATCH_PARENT, // Width of TextView
+                LayoutParams.WRAP_CONTENT); // Height of TextView
         lp2.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-        
+
+        LayoutParams lp3 = new LayoutParams(
+                LayoutParams.WRAP_CONTENT, // Width of TextView
+                LayoutParams.WRAP_CONTENT); // Height of TextView
+        lp3.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+
+
+        /*ScrollView sv = new ScrollView(this);
+        sv.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        LinearLayout ll = new LinearLayout(this);
+        ll.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+
+        ll.setOrientation(1);
+        sv.addView(ll);
+*/
+        /*for(int i = 0; i < 20; i++)
+        {
+            Button b = new Button(this);
+            b.setText("Button "+i);
+            ll.addView(b);
+        }*/
+
+//        rl.addView(sv);
+
         for (int row = 0; row < item.length; row++) {
 
             for (int col = 0; col < item[row].length; col++) {
@@ -144,12 +179,16 @@ public class MainActivity extends Activity {
   // set description a little bit lower
                 if (col != 1)
                 {
-                    tv.setX(x); tv.setY(y);
+                    tv.setX(x);
+                    tv.setY(y);
                     x += 250;
+                    tv.setLayoutParams(lp);
                 }
                 else
                 {
-                    tv.setX(100);   tv.setY(y+50);
+                      tv.setX(100);
+                      tv.setY(y+50);
+                      tv.setLayoutParams(lp2);
                 }
 
 /*
@@ -160,13 +199,14 @@ public class MainActivity extends Activity {
 */
 
                 // Apply the layout parameters to TextView widget
-                tv.setLayoutParams(lp);
+//                tv.setLayoutParams(lp);
                 // Set text to display in TextView
                 tv.setText(item[row][col]);
                 // Set a text color for TextView text
                 tv.setTextColor(Color.parseColor("#ff0000"));
                 // Add newly created TextView to parent view group (RelativeLayout)
                 rl.addView(tv);
+  //              ll.addView(tv);
             }
 
             CheckBox cb = new CheckBox(getApplicationContext());
@@ -178,6 +218,7 @@ public class MainActivity extends Activity {
  //           cb.setText(intArray.toString());
             cb.setX(x);
             cb.setY(y);
+            //ll.addView(cb);
             rl.addView(cb);
             x += 250;
 
@@ -189,6 +230,7 @@ public class MainActivity extends Activity {
   //          qty.setText(intArray.toString());
             qty.setX(x);
             qty.setY(y-20);
+            //ll.addView(qty);
             rl.addView(qty);
 
             x = 100;
@@ -196,6 +238,8 @@ public class MainActivity extends Activity {
 
             // add a check box
         }
+  //      rl.addView(sv);
+
 
         Button slct = new Button(getApplicationContext());
         slct.setText("Select");
@@ -207,7 +251,9 @@ public class MainActivity extends Activity {
 //        slct.setText(id3.toString());
 //        slct.setX(x);
         slct.setY(y);
-        slct.setLayoutParams(lp2);
+
+        slct.setLayoutParams(lp3);
+
         rl.addView(slct);
 
         return intArray;
