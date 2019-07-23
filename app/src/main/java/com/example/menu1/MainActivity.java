@@ -40,22 +40,23 @@ public class MainActivity extends Activity {
         item[5][0] = "Item 6";
         item[6][0] = "Item 7";
 
-        item[0][1] = "01.00";
-        item[1][1] = "10.00";
-        item[2][1] = "20.00";
-        item[3][1] = "05.00";
-        item[4][1] = "10.00";
-        item[5][1] = "20.00";
-        item[6][1] = "05.00";
+        item[0][1] = "Description 1";
+        item[1][1] = "Description 2";
+        item[2][1] = "Description 3";
+        item[3][1] = "Description 4";
+        item[4][1] = "Description 6";
+        item[5][1] = "Description 7";
+        item[6][1] = "Description 5";
+
+        item[0][2] = "01.00";
+        item[1][2] = "10.00";
+        item[2][2] = "20.00";
+        item[3][2] = "05.00";
+        item[4][2] = "20.00";
+        item[5][2] = "05.00";
+        item[6][2] = "10.00";
 
 
-        item[0][2] = "Description 1";
-        item[1][2] = "Description 2";
-        item[2][2] = "Description 3";
-        item[3][2] = "Description 4";
-        item[4][2] = "Description 5";
-        item[5][2] = "Description 6";
-        item[6][2] = "Description 7";
 
         final int[][] orderList = createMenuList(item);
 
@@ -188,6 +189,7 @@ public class MainActivity extends Activity {
                 tv.setText(item[row][col]);
                 // Set a text color for TextView text
                 tv.setTextColor(Color.parseColor("#ff0000"));
+//                ll.setGravity(1);
                 ll.addView(tv);
 //                rl.addView(tv);
               }
@@ -202,6 +204,7 @@ public class MainActivity extends Activity {
 //            cb.setX(x1);
 //            cb.setY(y1);
   //          cb.setLayoutParams(lp);
+ //           ll.setGravity(1);
             ll.addView(cb);
 //            x += 250;
 
@@ -223,7 +226,7 @@ public class MainActivity extends Activity {
             // add a check box
         }
 //        rl.removeView(sv);
-
+//        ll.setGravity(1);
         rl.addView(sv);
 
 
