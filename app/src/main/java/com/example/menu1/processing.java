@@ -321,7 +321,7 @@ public class processing extends AppCompatActivity {
     //////////////////////////////////////////////////
 //////////////////////////////////////////////////
 //////////////////////////////////////////////////
-    //create EditViews
+    //create EditViews+
     public void createEditView(int x, int y, RelativeLayout rl, int viewID) {
         // Create a TextView programmatically.
         EditText tv = new EditText(getApplicationContext());

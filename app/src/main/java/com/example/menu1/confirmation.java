@@ -1,16 +1,19 @@
 package com.example.menu1;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
-
 public class confirmation extends AppCompatActivity {
 
+    Bundle b = new Bundle();
+    Bundle b1 = new Bundle();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,23 +23,26 @@ public class confirmation extends AppCompatActivity {
         int[] viewID = {0, 0, 0}; // List of names of created Views
         createViews(viewID);
 
-        TextView orderData = (TextView) findViewById((viewID[0]));
+        final TextView orderData = (TextView) findViewById((viewID[0]));
         orderData.setText(String.valueOf(viewID[0]));
+        orderData.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
 
+        Button sendOrderBtn = (Button) findViewById((viewID[1]));
 
-        Bundle b = this.getIntent().getExtras();
+        //final Bundle b = this.getIntent().getExtras();
+        b = this.getIntent().getExtras();
 
 //        String[][] orderList =b.getStringArrayList("orderList");
-        String[] itemName = b.getStringArray("itemName");
-        String[] itemPrice = b.getStringArray("itemPrice");
-        String[] itemQty = b.getStringArray("itemQty");
-        String[] cardInfo = b.getStringArray("cardInfo");
+        final String[] itemName = b.getStringArray("itemName");
+        final String[] itemPrice = b.getStringArray("itemPrice");
+        final String[] itemQty = b.getStringArray("itemQty");
+        final String[] cardInfo = b.getStringArray("cardInfo");
 
-        String deliveryCharge = b.getString("deliveryCharge");
-        String orderTotal = b.getString("orderTotal");
-        String Total = b.getString("Total");
-        String subtotal = b.getString("subtotal");
-        String tax = b.getString("tax");
+        final String deliveryCharge = b.getString("deliveryCharge");
+        final String orderTotal = b.getString("orderTotal");
+        final String Total = b.getString("Total");
+        final String subtotal = b.getString("subtotal");
+        final String tax = b.getString("tax");
 
 
         orderData.setText("");
@@ -62,28 +68,43 @@ public class confirmation extends AppCompatActivity {
         orderData.append("Card Date: " + cardInfo[1] + "\n");
         orderData.append("Verify: " + cardInfo[2] + "\n");
 
-        orderData.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+
+        // set button activity:
+        sendOrderBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+/*
+                orderData.setText("We got this far.");
+                Intent i = new Intent(confirmation.this, acknowledge.class);
+   //             Bundle mBundle = new Bundle();
+                startActivity(i);
+*/
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+//                b1 = b;
+
+                sendIntent.putExtra("cardInfo", cardInfo);
+                sendIntent.putExtra("itemName", itemName);
+                sendIntent.putExtra("itemPrice", itemPrice);
+                sendIntent.putExtra("itemQty", itemQty);
+                sendIntent.putExtra("orderTotal", orderTotal);
+                sendIntent.putExtra("deliveryCharge", deliveryCharge);
+                sendIntent.putExtra("tax", tax);
+                sendIntent.putExtra("Total", Total);
+//                sendIntent.putExtra("CardNumber", cardInfo[0]);
+//                sendIntent.putExtra("CardDate", cardInfo[1]);
+//                sendIntent.putExtra("CardVerify", cardInfo[2]);
+
+//                sendIntent.putExtra(b);
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+            }
+        });
 
     }
 
-
-
-
     public void createViews(int[] viewID) {
 
-        int x = 200, y = 200;
-//        int[][] intArray = new int[item.length+1][2];
-
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.rl);
-/*
-
-        for (int row = 0; row < item.length; row++) {
-
-            for (int col = 0; col < item[row].length; col++) {
-*/
-        // Get the widgets reference from XML layout
-
-
         // Create a TextView programmatically.
         TextView tv = new TextView(getApplicationContext());
 
@@ -109,58 +130,29 @@ public class confirmation extends AppCompatActivity {
 
 
         rl.addView(tv);
-/*
-            }
-*/
 
-/*
-            CheckBox cb = new CheckBox(getApplicationContext());
-            cb.setText("Quantity: ");
-            //
-            cb.setId(cb.generateViewId());
-            Integer id = (cb.getId());
-            intArray[row][0] = id;
- //           cb.setText(intArray.toString());
-            cb.setX(x);
-            cb.setY(y);
-            rl.addView(cb);
-            x += 250;
+// rules for submit button
+        RelativeLayout.LayoutParams rLParams =
+                new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        rLParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 1);
+        rLParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
 
-            EditText qty = new EditText(getApplicationContext());
-            qty.setText("1");
-            qty.setId(qty.generateViewId());
-            Integer id2 = (qty.getId());
-            intArray[row][1] = id2;
-  //          qty.setText(intArray.toString());
-            qty.setX(x);
-            qty.setY(y-20);
-            rl.addView(qty);
+        Button senddata = new Button(getApplicationContext());
+        senddata.setText("Order");
+//        senddata.setId("select1());
+        senddata.setId(tv.generateViewId());
 
-            x = 100;
-            y += 200;
-
-            // add a check box
-        }
-
-        Button slct = new Button(getApplicationContext());
-        slct.setText("Select");
-        //slct.setId("select1".toInt());
-
-        slct.setId(slct.generateViewId());
-        Integer id3 = slct.getId();
-        intArray[item.length][0] = id3;
+        senddata.setId(senddata.generateViewId());
+        viewID[1] = senddata.getId();
+  //      Integer id3 = senddata.getId();
+//        intArray[item.length][0] = id3;
 //        slct.setText(id3.toString());
-        slct.setX(x);
-        slct.setY(y);
-        rl.addView(slct);
-
-        return intArray;
-*/
-
-
+        //senddata.setX(x);
+        //senddata.setY(y);
+        rl.addView(senddata, rLParams);
 
     }
 
-
-
 }
+

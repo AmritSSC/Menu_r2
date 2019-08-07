@@ -20,6 +20,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 
@@ -32,6 +35,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         final String[][] item = new String[7][3];
+
         item[0][0] = "Item 1";
         item[1][0] = "Item 2";
         item[2][0] = "Item 3";
@@ -117,7 +121,6 @@ public class MainActivity extends Activity {
 
 
                 startActivity(i);
-
             }
             // read dynamically generated checkboxes
 
