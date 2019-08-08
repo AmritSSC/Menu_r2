@@ -80,8 +80,6 @@ public class confirmation extends AppCompatActivity {
 */
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-
-
                 sendIntent.putExtra("cardInfo", cardInfo);
                 sendIntent.putExtra("itemName", itemName);
                 sendIntent.putExtra("itemPrice", itemPrice);
